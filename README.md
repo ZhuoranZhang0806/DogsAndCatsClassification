@@ -1,43 +1,3 @@
-# 🐶🐱 Dogs vs Cats Classification
-
-**Practical Lab 3 — Deep Learning Models for Image Classification**
-
----
-
-## 📌 Project Overview
-
-This project focuses on binary image classification of **cats and dogs** using deep learning models.
-
-Two pre-trained convolutional neural networks are implemented:
-
-* **VGG16 (Fine-Tuned)**
-* **MobileNetV2 (Transfer Learning + Fine-Tuning)**
-
-The objective is to explore how transfer learning improves performance compared to traditional approaches and to analyze model behavior using multiple evaluation metrics.
-
----
-
-## 🎯 Objectives
-
-* Apply **transfer learning using pre-trained models**
-* Perform **fine-tuning to improve model performance**
-* Evaluate models using multiple metrics
-* Analyze model errors and limitations
-* Compare different deep learning architectures
-
----
-
-## 📂 Dataset
-
-The dataset consists of labeled images of cats and dogs, divided into:
-
-```id="8y3c7n"
-data/
-│
-├── train/
-├── validation/
-└── test/
-```
 
 Each subset contains two categories:
 
@@ -46,24 +6,48 @@ Each subset contains two categories:
 
 ---
 
+
 ## 🧠 Models
 
-### 1️⃣ VGG16 (Fine-Tuned)
+### 1️⃣ Vanilla CNN (Baseline)
+
+A simple CNN built from scratch.
+
+**Purpose:**
+
+* Establish baseline performance
+* Understand limitations of training without pre-trained features
+
+**Limitations:**
+
+* Lower accuracy
+* Prone to overfitting
+* Weak feature extraction ability
+
+---
+
+### 2️⃣ VGG16 (Fine-Tuned)
 
 VGG16 is a deep convolutional neural network pre-trained on ImageNet.
 
 **Approach:**
 
 * Load pre-trained weights
-* Freeze convolutional layers
+* Freeze convolutional base
 * Train custom classifier
 * Unfreeze top layers for fine-tuning
 
+**Characteristics:**
+
+* High accuracy
+* Strong feature extraction
+* Computationally expensive
+
 ---
 
-### 2️⃣ MobileNetV2
+### 3️⃣ MobileNetV2
 
-MobileNetV2 is a lightweight and efficient architecture optimized for speed and performance.
+MobileNetV2 is a lightweight architecture optimized for efficiency.
 
 **Advantages:**
 
@@ -73,13 +57,40 @@ MobileNetV2 is a lightweight and efficient architecture optimized for speed and 
 
 ---
 
+## 🤔 Why Three Models?
+
+Although the original requirement only asked for **two models**, this project includes **three models** to provide a more comprehensive comparison and deeper analysis.
+
+The motivation for selecting these three models is:
+
+* **Vanilla CNN (Baseline Model)**  
+  Used to establish a reference point. It shows how a model performs when trained from scratch without pre-trained knowledge.
+
+* **VGG16 (Deep Pre-trained Model)**  
+  Represents a **high-capacity, deep architecture** with strong feature extraction ability. It helps evaluate the impact of model depth and complexity.
+
+* **MobileNetV2 (Lightweight Pre-trained Model)**  
+  Represents an **efficient and optimized architecture**, designed for speed and lower computational cost while maintaining high performance.
+
+---
+
+### 🎯 Key Idea
+
+By selecting these three models, the project enables a meaningful comparison across:
+
+* Baseline vs Transfer Learning
+* Heavy vs Lightweight architectures
+
+---
+
 ## ⚙️ Methodology
 
 1. Load dataset using `image_dataset_from_directory`
-2. Apply preprocessing using model-specific normalization
-3. Train models using transfer learning
-4. Fine-tune selected layers
-5. Evaluate models on the test dataset
+2. Apply preprocessing and normalization
+3. Train baseline CNN model
+4. Apply transfer learning (VGG16, MobileNetV2)
+5. Fine-tune selected layers
+6. Evaluate models on test dataset
 
 ---
 
@@ -91,25 +102,47 @@ The models are evaluated using:
 * Confusion Matrix
 * Precision, Recall, F1-score
 * Precision-Recall Curve
+* Training History (Loss & Accuracy)
 * Error Analysis
 
 ---
 
 ## 📈 Results Summary
 
-| Model       | Accuracy |
-| ----------- | -------- |
-| VGG16       | ~94%     |
-| MobileNetV2 | ~98%     |
+| Model        | Accuracy |
+|-------------|--------|
+| Vanilla CNN | ~50%   |
+| VGG16       | ~94%   |
+| MobileNetV2 | ~98%   |
 
 ---
 
 ## 🔍 Key Findings
 
-* Transfer learning significantly improves classification performance
-* MobileNetV2 achieves higher accuracy and better generalization
-* VGG16 performs well but shows more sensitivity to complex images
-* Both models perform consistently across classes
+* Transfer learning significantly improves performance over baseline CNN
+* Vanilla CNN performs close to random guessing due to limited feature learning
+* MobileNetV2 achieves the best performance with high efficiency
+* VGG16 provides strong but computationally heavier results
+* Pre-trained models generalize better on unseen data
+
+---
+
+## 🧠 Thinking Points
+
+### 🔹 Vanilla CNN
+* Performs poorly due to lack of pre-trained features
+* High risk of overfitting
+* Weak generalization ability
+
+### 🔹 MobileNetV2
+* Efficient and lightweight
+* Strong balance between speed and accuracy
+* Best overall performance
+
+### 🔹 VGG16
+* Deep architecture enables strong feature extraction
+* Higher computational cost
+* Stable but slightly less efficient than MobileNetV2
 
 ---
 
@@ -117,23 +150,27 @@ The models are evaluated using:
 
 * Some images are visually ambiguous
 * Lighting conditions and background noise affect predictions
-* Misclassifications occur in low-quality or complex images
+* Misclassification occurs in complex or low-quality images
+* Class boundaries are sometimes unclear
 
 ---
 
 ## 💡 Conclusion
 
-This project demonstrates that transfer learning is highly effective for image classification tasks.
+This project demonstrates that **transfer learning is highly effective** for image classification tasks.
 
-MobileNetV2 achieves the best performance due to its efficient architecture, while VGG16 provides stable but slightly lower results.
+* **MobileNetV2** achieves the best performance due to efficiency and generalization  
+* **VGG16** provides strong and stable results but is computationally heavier  
+* **Vanilla CNN** highlights the importance of pre-trained feature extraction  
 
 ---
 
 ## 🚀 Future Work
 
-* Add baseline model (Vanilla CNN) for comparison
-* Apply data augmentation
+* Apply advanced data augmentation
 * Experiment with other architectures (ResNet, EfficientNet)
+* Hyperparameter tuning
+* Use larger and more diverse datasets
 
 ---
 
@@ -149,8 +186,8 @@ MobileNetV2 achieves the best performance due to its efficient architecture, whi
 
 ## 👤 Author
 
-Zhuoran Zhang 9048508
-Conestoga College
+Zhuoran Zhang — 9048508  
+Conestoga College  
 Applied AI & Machine Learning
 
 ---
